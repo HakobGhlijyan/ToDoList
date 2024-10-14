@@ -14,7 +14,7 @@ struct TLButtonView: View {
     
     var body: some View {
         Button {
-        //log in
+            action()
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
@@ -24,8 +24,9 @@ struct TLButtonView: View {
                     .foregroundStyle(.white)
                     .bold()
             }
+            .frame(height: 40)
         }
-        .padding()
+        
     }
 }
 

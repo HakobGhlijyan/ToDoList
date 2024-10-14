@@ -14,10 +14,21 @@ struct LoginView: View {
         NavigationStack {
             VStack {
                 //Header
-                HeaderView(title: "To Do List", subTitle: "Get things done", angle: 15, backgroundColor: Color.indigo)
+                HeaderView(
+                    title: "To Do List",
+                    subTitle: "Get things done",
+                    angle: 15,
+                    backgroundColor: Color.indigo
+                )
                 
                 //Login Form
                 Form {
+                    //Error
+                    if !viewModel.errorMessage.isEmpty {
+                        Text(viewModel.errorMessage)
+                            .foregroundColor(.red)
+                    }
+                    
                     TextField("Email Address", text: $viewModel.email)
                         .textFieldStyle(.plain)
                         .textInputAutocapitalization(.none)
@@ -26,11 +37,12 @@ struct LoginView: View {
                         .textFieldStyle(.plain)
 
                     TLButtonView(title: "Login", backgroundColor: .blue) {
-                        
+                        viewModel.login()
                     }
+                    
                 }
                 .offset(y: -50)
-                
+            
                 //Create New Account
                 VStack {
                     Text("New around here?")
