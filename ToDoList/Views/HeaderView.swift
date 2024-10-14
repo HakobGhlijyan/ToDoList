@@ -11,12 +11,12 @@ struct HeaderView: View {
     let title: String
     let subTitle: String
     let angle: Double
-    let background: Color
+    let backgroundColor: Color
     
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 0)
-                .foregroundStyle(background)
+                .foregroundStyle(backgroundColor)
                 .rotationEffect(.degrees(angle))
             
             VStack {
@@ -40,5 +40,5 @@ struct HeaderView: View {
 
 
 #Preview {
-    HeaderView(title: "To Do List", subTitle: "Get things done", angle: 15, background: Color.indigo)
+    HeaderView(title: "To Do List", subTitle: "Get things done", angle: 15, backgroundColor: Color.indigo)
 }
