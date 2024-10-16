@@ -8,5 +8,7 @@
 import Foundation
 
 final class ToDoListViewModel: ObservableObject {
+    @Published var showingNewItemView: Bool = false
+    
     init() {}
 }
