@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @StateObject private var viewModel: ProfileViewModel = ProfileViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack {
+                Text("Welcome to ToDoList")
+            }
+            .navigationTitle("Profile")
+        }
     }
 }
 
 #Preview {
     ProfileView()
+        .preferredColorScheme(.dark)
 }
