@@ -32,9 +32,11 @@ struct LoginView: View {
                     TextField("Email Address", text: $viewModel.email)
                         .textFieldStyle(.plain)
                         .textInputAutocapitalization(.none)
+                        .autocapitalization(.none)
 
                     SecureField("Password", text: $viewModel.password)
                         .textFieldStyle(.plain)
+                        .autocapitalization(.none)
 
                     TLButtonView(title: "Login", backgroundColor: .blue) {
                         viewModel.login()

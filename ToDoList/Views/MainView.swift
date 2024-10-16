@@ -23,7 +23,7 @@ struct MainView: View {
         TabView {
             ToDoListView(userId: viewModel.currentUserId)
                 .tabItem {
-                    Label("Home", systemImage: "home" )
+                    Label("Home", systemImage: "house")
                 }
             ProfileView()
                 .tabItem {

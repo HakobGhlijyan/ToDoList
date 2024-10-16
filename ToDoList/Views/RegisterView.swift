@@ -20,14 +20,17 @@ struct RegisterView: View {
                 TextField("Full Name", text: $viewModel.name)
                     .textFieldStyle(.plain)
                     .autocorrectionDisabled()
+                    .autocapitalization(.none)
                 
                 TextField("Email Address", text: $viewModel.email)
                     .textFieldStyle(.plain)
                     .textInputAutocapitalization(.none)
                     .autocorrectionDisabled()
+                    .autocapitalization(.none)
                 
                 SecureField("Password", text: $viewModel.password)
                     .textFieldStyle(.plain)
+                    .autocapitalization(.none)
 
                 TLButtonView(title: "Create Account", backgroundColor: .green) {
                     viewModel.register()
