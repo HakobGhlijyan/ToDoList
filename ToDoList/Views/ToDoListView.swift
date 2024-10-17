@@ -6,20 +6,34 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
 
 struct ToDoListView: View {
     @StateObject private var viewModel: ToDoListViewModel = ToDoListViewModel()
-    
-    private let userId: String
-    
+
+    // Query for Firestore -> array data
+    // array no init , but is one user != two user data. it's unique.
+    @FirestoreQuery var items: [ToDoListItem]
+        
     init(userId: String) {
-        self.userId = userId
+        //users/<id>/todos/<entries>
+        // this array items init for query and add all data for thii id user
+        self._items = FirestoreQuery(collectionPath: "users/\(userId)/todos")
     }
     
     var body: some View {
         NavigationStack {
             VStack {
-                Text("Welcome to ToDoList")
+                List(items) { item in
+                    ToDoListItemVIew(item: item)
+                        .swipeActions {
+                            Button("Delete", role: .destructive) {
+                                viewModel.delete(id: item.id)
+                            }
+                        }
+                }
+                .listStyle(.plain)
             }
             .navigationTitle("To Do List")
             .toolbar {
@@ -40,6 +54,6 @@ struct ToDoListView: View {
 }
 
 #Preview {
-    ToDoListView(userId: "")
+    ToDoListView(userId: "IltYasRX0deTTo6KonRZgJtdLD02")
         .preferredColorScheme(.dark)
 }

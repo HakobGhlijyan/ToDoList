@@ -6,7 +6,13 @@
 //
 
 import Foundation
+import FirebaseAuth
+import FirebaseFirestore
 
 final class ToDoListItemViewModel: ObservableObject {
     init() {}
+    
+    func toggleIsDone(item: ToDoListItem) {
+        
+    }
 }

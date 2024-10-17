@@ -37,7 +37,7 @@ final class NewItemViewModel: ObservableObject {
             description: description,
             dueDate: dueDate.timeIntervalSince1970,
             createdDate: Date().timeIntervalSince1970,
-            isDoing: false
+            isDone: false
         )
         
         // save model indata base in firebase FirebaseFirestore is users id
