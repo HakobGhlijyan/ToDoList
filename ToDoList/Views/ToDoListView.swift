@@ -10,7 +10,11 @@ import FirebaseAuth
 import FirebaseFirestore
 
 struct ToDoListView: View {
-    @StateObject private var viewModel: ToDoListViewModel = ToDoListViewModel()
+//    @StateObject private var viewModel: ToDoListViewModel = ToDoListViewModel()
+    // ego ispolzovali no ne mogli peredavat v viewmodel nash id
+    // potomu i ne budem ego init , a v init egogo struct.
+    // budet init kak sostoyanie , "vnedrenie zaviaimosti"
+    @StateObject private var viewModel: ToDoListViewModel
 
     // Query for Firestore -> array data
     // array no init , but is one user != two user data. it's unique.
@@ -20,6 +24,10 @@ struct ToDoListView: View {
         //users/<id>/todos/<entries>
         // this array items init for query and add all data for thii id user
         self._items = FirestoreQuery(collectionPath: "users/\(userId)/todos")
+        // obloochka sostoyanie vdedryaem zavisimost
+        self._viewModel = StateObject(wrappedValue: ToDoListViewModel(userId: userId))
+        
+        //TAK MI PEREDAYOM NAPRIMUYU SOZDOVAYA ZAVISIMOST VIEWMODEL DLYA TOGO CHTOB PRI INIT ON POLUShAl ot STUNCT ID USER I MOG RABOTAT VSVYAZKE
     }
     
     var body: some View {
