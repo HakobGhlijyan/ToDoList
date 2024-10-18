@@ -31,19 +31,21 @@ struct ToDoListView: View {
     }
     
     var body: some View {
-        //list version
-        /*
          NavigationStack {
              VStack {
-                 List(items) { item in
-                     ToDoListItemView(item: item)
-                         .swipeActions {
-                             Button("Delete", role: .destructive) {
-                                 viewModel.delete(id: item.id)
+                 if items.isEmpty {
+                     ContentUnavailableView("To Do List...", systemImage: "list.bullet.clipboard", description: Text("Please start adding \nyour new items to your To Do List."))
+                 } else {
+                     List(items) { item in
+                         ToDoListItemView(item: item)
+                             .swipeActions {
+                                 Button("Delete", role: .destructive) {
+                                     viewModel.delete(id: item.id)
+                                 }
                              }
-                         }
+                     }
+                     .listStyle(.plain)
                  }
-                 .listStyle(.plain)
              }
              .navigationTitle("To Do List")
              .toolbar {
@@ -60,36 +62,6 @@ struct ToDoListView: View {
                  NewItemView(newItemPresented: $viewModel.showingNewItemView)
              }
          }
-         */
-        //scroll version
-        NavigationStack {
-            ScrollView {
-                ForEach(items) { item in
-                    ToDoListItemView(item: item)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 4)
-                        .swipeActions {
-                            Button("Delete", role: .destructive) {
-                                viewModel.delete(id: item.id)
-                            }
-                        }
-                }
-            }
-            .navigationTitle("To Do List")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        viewModel.showingNewItemView.toggle()
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-
-                }
-            }
-            .sheet(isPresented: $viewModel.showingNewItemView) {
-                NewItemView(newItemPresented: $viewModel.showingNewItemView)
-            }
-        }
     }
 }
 
