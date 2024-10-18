@@ -27,21 +27,53 @@ struct ToDoListView: View {
         // obloochka sostoyanie vdedryaem zavisimost
         self._viewModel = StateObject(wrappedValue: ToDoListViewModel(userId: userId))
         
-        //TAK MI PEREDAYOM NAPRIMUYU SOZDOVAYA ZAVISIMOST VIEWMODEL DLYA TOGO CHTOB PRI INIT ON POLUShAl ot STUNCT ID USER I MOG RABOTAT VSVYAZKE
+        //TAK MI PEREDAYOM NAPRIMUYU SOZDOVAYA ZAVISIMOST VIEWMODEL DLYA TOGO CHTOB PRI INIT ON POLUCHAL ot STUNCT ID USER I MOG RABOTAT VSVYAZKE
     }
     
     var body: some View {
+        //list version
+        /*
+         NavigationStack {
+             VStack {
+                 List(items) { item in
+                     ToDoListItemView(item: item)
+                         .swipeActions {
+                             Button("Delete", role: .destructive) {
+                                 viewModel.delete(id: item.id)
+                             }
+                         }
+                 }
+                 .listStyle(.plain)
+             }
+             .navigationTitle("To Do List")
+             .toolbar {
+                 ToolbarItem(placement: .topBarTrailing) {
+                     Button {
+                         viewModel.showingNewItemView.toggle()
+                     } label: {
+                         Image(systemName: "plus")
+                     }
+
+                 }
+             }
+             .sheet(isPresented: $viewModel.showingNewItemView) {
+                 NewItemView(newItemPresented: $viewModel.showingNewItemView)
+             }
+         }
+         */
+        //scroll version
         NavigationStack {
-            VStack {
-                List(items) { item in
-                    ToDoListItemVIew(item: item)
+            ScrollView {
+                ForEach(items) { item in
+                    ToDoListItemView(item: item)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 4)
                         .swipeActions {
                             Button("Delete", role: .destructive) {
                                 viewModel.delete(id: item.id)
                             }
                         }
                 }
-                .listStyle(.plain)
             }
             .navigationTitle("To Do List")
             .toolbar {

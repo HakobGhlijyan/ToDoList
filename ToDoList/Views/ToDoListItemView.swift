@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct ToDoListItemVIew: View {
+struct ToDoListItemView: View {
     @StateObject private var viewModel: ToDoListItemViewModel = ToDoListItemViewModel()
     let item: ToDoListItem
     
     var body: some View {
-        HStack(alignment: .bottom) {
+        HStack {
             VStack(alignment: .leading) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(item.title).font(.headline).fontWeight(.bold).foregroundStyle(.primary)
@@ -30,6 +30,8 @@ struct ToDoListItemVIew: View {
                 viewModel.toggleIsDone(item: item)
             } label: {
                 Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
+                    .foregroundStyle( item.isDone ? .green : .red)
+                    .font(.title3)
             }
 
         }
@@ -38,7 +40,7 @@ struct ToDoListItemVIew: View {
 
 #Preview {
     VStack(spacing: 100.0) {
-        ToDoListItemVIew(
+        ToDoListItemView(
             item: .init(
                 id: "123",
                 title: "Get milk",
@@ -49,7 +51,7 @@ struct ToDoListItemVIew: View {
             )
         )
         
-        ToDoListItemVIew(
+        ToDoListItemView(
             item: .init(
                 id: "123",
                 title: "Get milk",
